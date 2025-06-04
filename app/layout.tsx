@@ -2,12 +2,11 @@ import React from "react"
 
 import "@/styles/globals.css"
 import { type Metadata } from "next"
-import { ClerkProvider } from "@clerk/nextjs"
-import { dark } from "@clerk/themes"
 
 import { fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
 import { ClerkWithThemeProvider } from "@/components/clerk"
+import { MouseTracker } from "@/components/mouse-tracker"
 import { SiteHeader } from "@/components/site-header"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -40,6 +39,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <ClerkWithThemeProvider>
             <div className="relative flex min-h-screen flex-col">
               <SiteHeader />
+              <MouseTracker />
               <div className="flex-1">{children}</div>
             </div>
             <TailwindIndicator />
