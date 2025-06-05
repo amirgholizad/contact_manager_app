@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import { SearchIcon, X } from "lucide-react"
 
@@ -8,12 +8,27 @@ import { Contact, ensureName, sortByName } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
-type SearchBarProps = {
-  contacts: Contact[]
-}
-
-export function ContactList({ contacts }: SearchBarProps) {
+export function ContactList() {
+  const contacts: Contact[] = [
+    { contactName: "John Doe", contactId: "1" },
+    { contactName: "Mary Johnson", contactId: "2" },
+    { contactName: "James Smith", contactId: "3" },
+    { contactName: "Emily Davis", contactId: "4" },
+    { contactName: "Michael Brown", contactId: "5" },
+  ]
   const [searchQuery, setSearchQuery] = useState("")
+
+  useEffect(() => {
+    const fetchContacts = async () => {
+      const res = await fetch("/api/contacts")
+      if (res.ok) {
+        const data = await res.json()
+      } else {
+        console.error("Failed to fetch contacts")
+      }
+    }
+    fetchContacts()
+  }, [])
 
   const filteredContacts = searchQuery
     ? sortByName(
@@ -30,7 +45,7 @@ export function ContactList({ contacts }: SearchBarProps) {
     <section className="flex flex-col items-center w-full ">
       <div className="relative flex items-center w-full">
         <Input
-          className="h-8 w-full rounded-full pl-4 pr-12 text-sm bg-slate-200 text-slate-100 border-0"
+          className="h-8 w-full rounded-full pl-4 pr-12 text-sm"
           placeholder="Search"
           value={searchQuery}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
