@@ -30,7 +30,7 @@ export function ContactList({ contacts }: SearchBarProps) {
     <section className="flex flex-col items-center w-full ">
       <div className="relative flex items-center w-full">
         <Input
-          className="h-8 w-full rounded-full pl-4 pr-12 text-sm bg-slate text-slate-100 border-0"
+          className="h-8 w-full rounded-full pl-4 pr-12 text-sm bg-slate-200 text-slate-100 border-0"
           placeholder="Search"
           value={searchQuery}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -63,7 +63,7 @@ export function ContactList({ contacts }: SearchBarProps) {
             >
               <li
                 key={index}
-                className="p-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors"
+                className="p-2 rounded-lg hover:opacity-50 transition-colors"
               >
                 {contact.contactName}
               </li>

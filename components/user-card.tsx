@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { currentUser } from "@clerk/nextjs/server"
 import { Plus } from "lucide-react"
 
@@ -26,7 +27,7 @@ export async function UserCard() {
           )}
         </Avatar>
         <div className="flex flex-col gap-0.5">
-          <div className="text-sm md:text-md text-white">
+          <div className="text-sm md:text-md">
             {user.emailAddresses[0].emailAddress}
           </div>
           <span className="pt-1 text-xs text-gray-400">
@@ -34,9 +35,12 @@ export async function UserCard() {
           </span>
         </div>
       </div>
-      <div>
-        <Plus />
-      </div>
+      <Link href={"/contacts/create"}>
+        {" "}
+        <div className="hover:opacity-50">
+          <Plus />
+        </div>
+      </Link>
     </div>
   )
 }
