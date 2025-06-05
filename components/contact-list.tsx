@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { SearchIcon, X } from "lucide-react"
 
 import { Contact, ensureName, sortByName } from "@/lib/utils"
@@ -53,14 +54,20 @@ export function ContactList({ contacts }: SearchBarProps) {
         </div>
       </div>
       <div className="mt-4 w-full max-w-md">
-        <ul className="space-y-2">
+        <ul className="flex flex-col gap-2">
           {filteredContacts.map((contact, index) => (
-            <li
-              key={index}
-              className="p-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors"
+            <Link
+              href={`/contacts/${contact.contactId}`}
+              key={contact.contactId}
+              className="hover:cursor-pointer"
             >
-              {contact.contactName}
-            </li>
+              <li
+                key={index}
+                className="p-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors"
+              >
+                {contact.contactName}
+              </li>
+            </Link>
           ))}
         </ul>
       </div>
