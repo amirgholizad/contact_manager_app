@@ -40,7 +40,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <div className="relative flex min-h-screen flex-col">
               <SiteHeader />
               <MouseTracker />
-              <div className="flex-1">{children}</div>
+              <main>{children}</main>
             </div>
             <TailwindIndicator />
           </ClerkWithThemeProvider>

@@ -12,10 +12,8 @@ const contacts: Contact[] = [
 
 export default function ContactsPage() {
   return (
-    <div className="flex flex-col h-dvh w-full items-center justify-center gap-6 px-10 md:py-10">
-      <div className="border-b border-gray-700 pb-4">
-        <UserCard />
-      </div>
+    <div className="flex flex-col h-dvh w-full max-w-[500px] items-center justify-center gap-6 px-10 md:py-10">
+      <UserCard />
       <ContactList contacts={contacts} />
     </div>
   )

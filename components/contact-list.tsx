@@ -27,10 +27,10 @@ export function ContactList({ contacts }: SearchBarProps) {
     : sortByName(ensureName([...contacts.map((contact) => ({ ...contact }))]))
 
   return (
-    <section>
-      <div className="relative flex items-center w-full max-w-xs md:max-w-md lg:max-w-[450px]">
+    <section className="flex flex-col items-center w-full ">
+      <div className="relative flex items-center w-full">
         <Input
-          className="h-8 rounded-full pl-4 pr-12 text-sm bg-slate text-slate-100 border-0"
+          className="h-8 w-full rounded-full pl-4 pr-12 text-sm bg-slate text-slate-100 border-0"
           placeholder="Search"
           value={searchQuery}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>

@@ -7,7 +7,7 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <section className="relative flex min-h-screen flex-col">
+    <section className="flex min-h-screen flex-col items-center justify-center w-full">
       <SignedIn>{children}</SignedIn>
       <SignedOut>
         <RedirectToSignIn />
