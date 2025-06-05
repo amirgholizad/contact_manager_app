@@ -38,7 +38,6 @@ export function SiteHeader() {
             <ThemeToggle />
             <SignedOut>
               <SignInButton />
-              <SignUpButton />
             </SignedOut>
             <SignedIn>
               <UserButton />

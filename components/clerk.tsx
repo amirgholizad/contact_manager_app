@@ -13,8 +13,6 @@ export function ClerkWithThemeProvider({
 }) {
   const { theme } = useTheme()
 
-  console.log("Current theme:", theme)
-
   return (
     <ClerkProvider
       appearance={{
