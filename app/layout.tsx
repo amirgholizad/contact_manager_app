@@ -2,6 +2,7 @@ import React from "react"
 
 import "@/styles/globals.css"
 import { type Metadata } from "next"
+import { Toaster } from "react-hot-toast"
 
 import { fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
@@ -45,6 +46,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <TailwindIndicator />
           </ClerkWithThemeProvider>
         </ThemeProvider>
+        <Toaster position="top-right" />
       </body>
     </html>
   )

@@ -8,21 +8,25 @@ import { Contact, ensureName, sortByName } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
-export function ContactList() {
-  const contacts: Contact[] = [
-    { contactName: "John Doe", contactId: "1" },
-    { contactName: "Mary Johnson", contactId: "2" },
-    { contactName: "James Smith", contactId: "3" },
-    { contactName: "Emily Davis", contactId: "4" },
-    { contactName: "Michael Brown", contactId: "5" },
-  ]
+export function ContactList({ userId }: { userId: string }) {
   const [searchQuery, setSearchQuery] = useState("")
+  const [contactList, setContactList] = useState<Contact[]>([])
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    setLoading(true)
     const fetchContacts = async () => {
-      const res = await fetch("/api/contacts")
+      const res = await fetch(`/api/contacts?userId=${userId}`)
       if (res.ok) {
         const data = await res.json()
+        console.log("Fetched contacts:", data)
+        const contactRaw = data.map((contact: any) => ({
+          contactName: contact.contact_name,
+          contactId: contact.contact_id,
+        }))
+
+        setContactList(contactRaw)
+        setLoading(false)
       } else {
         console.error("Failed to fetch contacts")
       }
@@ -33,13 +37,15 @@ export function ContactList() {
   const filteredContacts = searchQuery
     ? sortByName(
         ensureName(
-          [...contacts].filter((contact) => {
+          [...contactList].filter((contact) => {
             const searchContent = `${contact.contactName}`.toLowerCase()
             return searchContent.includes(searchQuery.toLowerCase())
           })
         )
       )
-    : sortByName(ensureName([...contacts.map((contact) => ({ ...contact }))]))
+    : sortByName(
+        ensureName([...contactList.map((contact) => ({ ...contact }))])
+      )
 
   return (
     <section className="flex flex-col items-center w-full ">
@@ -70,20 +76,25 @@ export function ContactList() {
       </div>
       <div className="mt-4 w-full max-w-md">
         <ul className="flex flex-col gap-2">
-          {filteredContacts.map((contact, index) => (
-            <Link
-              href={`/contacts/${contact.contactId}`}
-              key={contact.contactId}
-              className="hover:cursor-pointer"
-            >
+          {loading ? (
+            <p>Loading</p>
+          ) : contactList.length === 0 ? (
+            <p>You have no contacts!</p>
+          ) : (
+            filteredContacts.map((contact, index) => (
               <li
                 key={index}
                 className="p-2 rounded-lg hover:opacity-50 transition-colors"
               >
-                {contact.contactName}
+                <Link
+                  href={`/contacts/${contact.contactId}`}
+                  className="hover:cursor-pointer"
+                >
+                  {contact.contactName}
+                </Link>
               </li>
-            </Link>
-          ))}
+            ))
+          )}
         </ul>
       </div>
     </section>

@@ -21,8 +21,11 @@ export function formatDate(timestamp: number): string {
 }
 
 export type Contact = {
-  contactName?: string
-  contactId?: string
+  userId: string
+  contactName: string
+  contactId: string
+  contactEmail?: string
+  contactPhone?: string
   [key: string]: any
 }
 
