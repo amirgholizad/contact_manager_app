@@ -44,8 +44,8 @@ export function ContactForm({ action, userId }: ContactFormProps) {
     resolver: zodResolver(formSchema),
   })
 
-  if (action === "edit") {
-    useEffect(() => {
+  useEffect(() => {
+    if (action === "edit") {
       // Fetch existing contact data if editing
       const fetchContact = async () => {
         try {
@@ -70,8 +70,8 @@ export function ContactForm({ action, userId }: ContactFormProps) {
       }
 
       fetchContact()
-    }, [userId])
-  }
+    }
+  }, [userId])
   const onSubmit = async (data: FormData) => {
     if (action === "create") {
       try {
