@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import { SearchIcon, X } from "lucide-react"
 
@@ -8,29 +8,49 @@ import { Contact, ensureName, sortByName } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
-type SearchBarProps = {
-  contacts: Contact[]
-}
-
-export function ContactList({ contacts }: SearchBarProps) {
+export function ContactList({ userId }: { userId: string }) {
   const [searchQuery, setSearchQuery] = useState("")
+  const [contactList, setContactList] = useState<Contact[]>([])
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    setLoading(true)
+    const fetchContacts = async () => {
+      const res = await fetch(`/api/contacts?userId=${userId}`)
+      if (res.ok) {
+        const data = await res.json()
+        const contactRaw = data.map((contact: any) => ({
+          contactName: contact.contact_name,
+          contactId: contact.contact_id,
+        }))
+
+        setContactList(contactRaw)
+        setLoading(false)
+      } else {
+        console.error("Failed to fetch contacts")
+      }
+    }
+    fetchContacts()
+  }, [])
 
   const filteredContacts = searchQuery
     ? sortByName(
         ensureName(
-          [...contacts].filter((contact) => {
+          [...contactList].filter((contact) => {
             const searchContent = `${contact.contactName}`.toLowerCase()
             return searchContent.includes(searchQuery.toLowerCase())
           })
         )
       )
-    : sortByName(ensureName([...contacts.map((contact) => ({ ...contact }))]))
+    : sortByName(
+        ensureName([...contactList.map((contact) => ({ ...contact }))])
+      )
 
   return (
     <section className="flex flex-col items-center w-full ">
       <div className="relative flex items-center w-full">
         <Input
-          className="h-8 w-full rounded-full pl-4 pr-12 text-sm bg-slate-200 text-slate-100 border-0"
+          className="h-8 w-full rounded-full pl-4 pr-12 text-sm"
           placeholder="Search"
           value={searchQuery}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -55,20 +75,25 @@ export function ContactList({ contacts }: SearchBarProps) {
       </div>
       <div className="mt-4 w-full max-w-md">
         <ul className="flex flex-col gap-2">
-          {filteredContacts.map((contact, index) => (
-            <Link
-              href={`/contacts/${contact.contactId}`}
-              key={contact.contactId}
-              className="hover:cursor-pointer"
-            >
+          {loading ? (
+            <p>Loading</p>
+          ) : contactList.length === 0 ? (
+            <p>You have no contacts!</p>
+          ) : (
+            filteredContacts.map((contact, index) => (
               <li
                 key={index}
                 className="p-2 rounded-lg hover:opacity-50 transition-colors"
               >
-                {contact.contactName}
+                <Link
+                  href={`/contacts/${contact.contactId}`}
+                  className="hover:cursor-pointer"
+                >
+                  {contact.contactName}
+                </Link>
               </li>
-            </Link>
-          ))}
+            ))
+          )}
         </ul>
       </div>
     </section>

@@ -20,7 +20,9 @@ export function MainNav({ items }: MainNavProps) {
           <AvatarImage src="https://avatars.githubusercontent.com/u/135760894?v=4" />
           <AvatarFallback>AG</AvatarFallback>
         </Avatar>
-        <span className="inline-block font-bold">Developed by AmirG</span>
+        <span className="inline-block font-bold text-md md:text-xl">
+          Developed by AmirG
+        </span>
       </Link>
       {items?.length ? (
         <nav className="flex gap-6">
