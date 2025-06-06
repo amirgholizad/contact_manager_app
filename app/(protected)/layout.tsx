@@ -1,5 +1,3 @@
-"use client"
-
 import { RedirectToSignIn, SignedIn, SignedOut } from "@clerk/nextjs"
 
 interface RootLayoutProps {
