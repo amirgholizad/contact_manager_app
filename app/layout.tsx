@@ -21,18 +21,9 @@ interface RootLayoutProps {
   children: React.ReactNode
 }
 
-// Async wrapper component
-async function ClerkProviderWrapper({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return <ClerkProvider>{children}</ClerkProvider>
-}
-
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <ClerkProviderWrapper>
+    <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
         <head />
         <body
@@ -57,6 +48,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <Toaster position="top-right" />
         </body>
       </html>
-    </ClerkProviderWrapper>
+    </ClerkProvider>
   )
 }
