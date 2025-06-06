@@ -1,18 +1,27 @@
+// components/user-card.tsx
+"use client"
+
 import Link from "next/link"
-import { User, currentUser } from "@clerk/nextjs/server"
 import { Plus } from "lucide-react"
 
-import { formatDate } from "@/lib/utils"
 import { Avatar } from "@/components/ui/avatar"
 
-export async function UserCard({ user }: { user: User }) {
+export function UserCard({
+  email,
+  imageUrl,
+  createdAt,
+}: {
+  email: string
+  imageUrl?: string
+  createdAt: number
+}) {
   return (
     <div className="flex items-center justify-between w-full border-b border-gray-700 pb-4">
       <div className="flex items-center gap-2 w-[50%]">
         <Avatar className="size-10 md:size-12 bg-[#D9D9D9] rounded-full">
-          {user.imageUrl ? (
+          {imageUrl ? (
             <img
-              src={user.imageUrl}
+              src={imageUrl}
               alt="User Avatar"
               width={48}
               height={48}
@@ -23,11 +32,9 @@ export async function UserCard({ user }: { user: User }) {
           )}
         </Avatar>
         <div className="flex flex-col gap-0.5">
-          <div className="text-sm md:text-md">
-            {user.emailAddresses[0].emailAddress}
-          </div>
+          <div className="text-sm md:text-md">{email}</div>
           <span className="pt-1 text-xs text-gray-400">
-            {formatDate(new Date(user.createdAt).getTime())}
+            {new Date(createdAt).toLocaleDateString()}
           </span>
         </div>
       </div>

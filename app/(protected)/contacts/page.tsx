@@ -15,7 +15,11 @@ export default async function ContactsPage() {
 
   return (
     <div className="flex flex-col h-dvh w-full max-w-[500px] items-center justify-center gap-6 px-10 md:py-10">
-      <UserCard user={user} />
+      <UserCard
+        email={user.emailAddresses[0].emailAddress}
+        imageUrl={user.imageUrl}
+        createdAt={new Date(user.createdAt).getTime()}
+      />
       <ContactList userId={user.id} />
     </div>
   )
