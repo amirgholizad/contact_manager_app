@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { redirect } from "next/navigation"
 import { currentUser } from "@clerk/nextjs/server"
 import { Plus } from "lucide-react"
 
@@ -9,7 +8,10 @@ import { Avatar } from "@/components/ui/avatar"
 export async function UserCard() {
   const user = await currentUser()
 
-  if (!user) return redirect("/")
+  if (!user) {
+    // You might want to redirect or handle this differently
+    return <div>Loading...</div>
+  }
 
   return (
     <div className="flex items-center justify-between w-full border-b border-gray-700 pb-4">
@@ -37,7 +39,6 @@ export async function UserCard() {
         </div>
       </div>
       <Link href={"/contacts/create"}>
-        {" "}
         <div className="hover:opacity-50">
           <Plus />
         </div>
