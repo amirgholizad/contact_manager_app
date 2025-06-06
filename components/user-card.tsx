@@ -1,18 +1,11 @@
 import Link from "next/link"
-import { currentUser } from "@clerk/nextjs/server"
+import { User, currentUser } from "@clerk/nextjs/server"
 import { Plus } from "lucide-react"
 
 import { formatDate } from "@/lib/utils"
 import { Avatar } from "@/components/ui/avatar"
 
-export async function UserCard() {
-  const user = await currentUser()
-
-  if (!user) {
-    // You might want to redirect or handle this differently
-    return <div>Loading...</div>
-  }
-
+export async function UserCard({ user }: { user: User }) {
   return (
     <div className="flex items-center justify-between w-full border-b border-gray-700 pb-4">
       <div className="flex items-center gap-2 w-[50%]">
