@@ -12,7 +12,6 @@ export async function GET(req: Request) {
       .select("*")
       .eq("clerk_id", userId)
     if (data?.length === 0) {
-      console.log("No contacts found, inserting default contact")
       await supabase.from("users").insert({
         clerk_id: userId,
       })
@@ -49,7 +48,6 @@ export async function POST(req: Request) {
     }
 
     if (data?.length === 0) {
-      console.log("No contacts found, inserting default contact")
       await supabase.from("users").insert({
         clerk_id: newContact.userId,
       })

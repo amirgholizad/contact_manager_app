@@ -60,7 +60,6 @@ export function ContactForm({ action, userId }: ContactFormProps) {
           const data = await res.json()
           // Populate form with existing contact data
           if (data) {
-            console.log("Fetched contact data:", data)
             setValue("contactName", data.contact_name)
             setValue("contactEmail", data.contact_email)
             setValue("contactPhone", data.contact_phone)

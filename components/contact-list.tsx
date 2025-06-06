@@ -19,7 +19,6 @@ export function ContactList({ userId }: { userId: string }) {
       const res = await fetch(`/api/contacts?userId=${userId}`)
       if (res.ok) {
         const data = await res.json()
-        console.log("Fetched contacts:", data)
         const contactRaw = data.map((contact: any) => ({
           contactName: contact.contact_name,
           contactId: contact.contact_id,

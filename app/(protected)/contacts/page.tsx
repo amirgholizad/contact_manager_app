@@ -8,7 +8,6 @@ import { UserCard } from "@/components/user-card"
 
 export default async function ContactsPage() {
   const user = await currentUser()
-  console.log("User:", user?.id)
   if (!user) {
     return (
       <div className="text-center">You must be logged in to view contacts.</div>

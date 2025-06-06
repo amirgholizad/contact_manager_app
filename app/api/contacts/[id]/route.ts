@@ -49,7 +49,6 @@ export async function PUT(req: Request) {
     if (error) {
       console.error("Error updating contact:", error)
     }
-    console.log("Updated contact:", data)
     return new Response(JSON.stringify(data), {
       status: 200,
       headers: { "Content-Type": "application/json" },
