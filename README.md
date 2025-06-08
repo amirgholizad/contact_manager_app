@@ -113,8 +113,8 @@ Made with ❤️ by [AmirG](https://github.com/your-username)
 
 ## Demo
 
-![Demo0](./public/demo0.png)
-![Demo1](./public/demo1.png)
-![Demo3](./public/demo3.png)
-![Demo4](./public/demo4.png)
-![Demo5](./public/demo5.png)
+![Demo0](./public/demo0.jpeg)
+![Demo1](./public/demo1.jpeg)
+![Demo2](./public/demo2.jpeg)
+![Demo3](./public/demo3.jpeg)
+![Demo4](./public/demo4.jpeg)
