@@ -2,8 +2,6 @@
 
 A simple but complete contact management web application built using modern web technologies. This project was completed as part of a technical assignment and simulates a realistic full-stack task.
 
-Live Demo 👉 [Add your Vercel link here]
-
 ---
 
 ## 🛠 Tech Stack
@@ -103,18 +101,14 @@ To run this project locally:
 
 ## 📸 Screenshots
 
-_Add screenshots of the contact list, form modal, and mobile layout if desired._
-
----
-
-## 📬 Contact
-
-Made with ❤️ by [AmirG](https://github.com/your-username)
-
-## Demo
-
 ![Demo0](./public/demo0.jpeg)
 ![Demo1](./public/demo1.jpeg)
 ![Demo2](./public/demo2.jpeg)
 ![Demo3](./public/demo3.jpeg)
 ![Demo4](./public/demo4.jpeg)
+
+---
+
+## 📬 Contact
+
+Made with ❤️ by [AmirG](https://github.com/AmirGholizad)
